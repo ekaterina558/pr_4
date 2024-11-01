@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f0bedaf37eb4bf5967619b95fc98c16" Name="Diagram1">
+        <EntityTypeShape EntityType="name_database2Model.grafik_yborki_nomerov" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="name_database2Model.guests_currently_living_in_the_hotel" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="name_database2Model.invoice_for_payment" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="name_database2Model.Nomernoi_fond" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="name_database2Model.otchet_po_oplate" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="name_database2Model.report_on_the_state_of_the_room_stock_as_of_date" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="name_database2Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="name_database2Model.FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel" ManuallyRouted="false" />
+        <AssociationConnector Association="name_database2Model.FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov" ManuallyRouted="false" />
+        <AssociationConnector Association="name_database2Model.FK_guests_currently_living_in_the_hotel_otchet_po_oplate" ManuallyRouted="false" />
+        <AssociationConnector Association="name_database2Model.FK_invoice_for_payment_guests_currently_living_in_the_hotel" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

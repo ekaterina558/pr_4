@@ -1,0 +1,46 @@
+﻿<Page x:Class="pr_4.PageMain.PageRegistraciiGostya"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:pr_4.PageMain"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageRegistraciiGostya">
+
+    <Grid Background="#f5e6ab">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Фамилия" Grid.Row="1" Style="{StaticResource TextBlock}" Height="40" VerticalAlignment="Top" HorizontalAlignment="Center" Width="400" Margin="0,2,0,0" Grid.RowSpan="2"/>
+        <TextBox Text="" x:Name="a" Style="{StaticResource TextBox}"  Grid.Row="3" Grid.Column="1" />
+        <TextBlock Text="Имя" Style="{StaticResource TextBlock}" Grid.Row="3" Margin="0,17,200,0" VerticalAlignment="Top"/>
+        <TextBox Text="" x:Name="b" Style="{StaticResource TextBox}" Grid.Column="1"  Grid.Row="5"/>
+        <TextBlock Text="Отчество" Grid.Row="5" Style="{StaticResource TextBlock}" Height="40" HorizontalAlignment="Center" Width="400" Margin="0,15,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
+        <TextBox Text="" x:Name="c" Style="{StaticResource TextBox}"  Grid.Row="1" Grid.Column="1"  />
+        <TextBlock Text="Номер телефона" Style="{StaticResource TextBlock}" Grid.Row="7" Margin="0,17,200,0" VerticalAlignment="Top"/>
+        <TextBox Text="" x:Name="d" Style="{StaticResource TextBox}" Grid.Column="1"  Grid.Row="9"/>
+        <TextBlock Text="Забронированный номер" Style="{StaticResource TextBlock}" Grid.Row="9" VerticalAlignment="Top" Margin="0,17,50,0"/>
+        <TextBox Text="" x:Name="f" Style="{StaticResource TextBox}" Grid.Column="1"  Grid.Row="7" />
+        <TextBlock Text="Статус номера" Style="{StaticResource TextBlock}" Grid.Row="11" Margin="0,17,200,0" VerticalAlignment="Top"/>
+        <TextBox Text="" x:Name="g" Style="{StaticResource TextBox}" Grid.Column="1"  Grid.Row="11" />
+        <Button Content="Зарегистрировать" Style="{StaticResource ButtonR}" Margin="335,2,335,-60" Grid.Row="12" Grid.ColumnSpan="2"/>
+    </Grid>
+</Page>

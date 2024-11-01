@@ -1,0 +1,36 @@
+﻿<Page x:Class="pr_4.PageMain.PageRaspisanieYborki"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:pr_4.PageMain"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageRaspisanieYborki">
+    <Grid Background="#f5e6ab">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Дата" Style="{StaticResource TextBlock}" Height="40" HorizontalAlignment="Center" Width="400"/>
+        <TextBox Text="" x:Name="a" Style="{StaticResource TextBox}"  Grid.Row="2" Grid.Column="1" Margin="0,10,0,0" />
+        <TextBlock Text="Этаж" Style="{StaticResource TextBlock}" Grid.Row="2" Margin="0,25,50,0" VerticalAlignment="Top"/>
+        <TextBox Text="" x:Name="b" Style="{StaticResource TextBox}" Grid.Column="1"  Grid.Row="4" Margin="0,5,0,5"/>
+        <TextBlock Text="Горничная" Grid.Row="4" Style="{StaticResource TextBlock}" Height="25" HorizontalAlignment="Center" Width="400" Margin="0,27,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <TextBox Text="" x:Name="c" Style="{StaticResource TextBox}" Grid.Column="1" Margin="0,7,0,3"  />
+        <TextBlock Text="Статус номера" Style="{StaticResource TextBlock}" Grid.Row="6" VerticalAlignment="Top" Margin="0,25,50,0"/>
+        <TextBox Text="" x:Name="d" Style="{StaticResource TextBox}" Grid.Column="1" Margin="0,5,0,5" Grid.Row="6"  />
+        <Button Content="Назад" Style="{StaticResource ButtonR}" Margin="335,45,335,-22" Grid.Row="7" Grid.ColumnSpan="2"/>
+    </Grid>
+</Page>

@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище name_database2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="grafik_yborki_nomerov">
+          <Key>
+            <PropertyRef Name="housemaid_ID" />
+          </Key>
+          <Property Name="housemaid_ID" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="otchestvo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="floor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="data" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guests_currently_living_in_the_hotel">
+          <Key>
+            <PropertyRef Name="client_ID" />
+          </Key>
+          <Property Name="floor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nomer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kategoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="client_ID" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="otchestvo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="invoice_for_payment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="artikul" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tovar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kolichestvo" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="cena" Type="money" Nullable="false" />
+          <Property Name="stavkaNDS" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="summaNDS" Type="money" Nullable="false" />
+          <Property Name="summa" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nomernoi_fond">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="floor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nomer" Type="int" Nullable="false" />
+          <Property Name="kategoria" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="otchet_po_oplate">
+          <Key>
+            <PropertyRef Name="client_ID" />
+          </Key>
+          <Property Name="client_ID" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="otchestvo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kategoria_nomera" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="data_vezda" Type="date" Nullable="false" />
+          <Property Name="data_viezda" Type="date" Nullable="false" />
+          <Property Name="summa" Type="money" Nullable="false" />
+          <Property Name="oplacheno" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="report_on_the_state_of_the_room_stock_as_of_date">
+          <Key>
+            <PropertyRef Name="floor_ID" />
+          </Key>
+          <Property Name="floor_ID" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="nomer" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="kategoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="data_viezda" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel">
+          <End Role="guests_currently_living_in_the_hotel" Type="Self.guests_currently_living_in_the_hotel" Multiplicity="1" />
+          <End Role="grafik_yborki_nomerov" Type="Self.grafik_yborki_nomerov" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="guests_currently_living_in_the_hotel">
+              <PropertyRef Name="client_ID" />
+            </Principal>
+            <Dependent Role="grafik_yborki_nomerov">
+              <PropertyRef Name="housemaid_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guests_currently_living_in_the_hotel_otchet_po_oplate">
+          <End Role="otchet_po_oplate" Type="Self.otchet_po_oplate" Multiplicity="1" />
+          <End Role="guests_currently_living_in_the_hotel" Type="Self.guests_currently_living_in_the_hotel" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="otchet_po_oplate">
+              <PropertyRef Name="client_ID" />
+            </Principal>
+            <Dependent Role="guests_currently_living_in_the_hotel">
+              <PropertyRef Name="client_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_for_payment_guests_currently_living_in_the_hotel">
+          <End Role="guests_currently_living_in_the_hotel" Type="Self.guests_currently_living_in_the_hotel" Multiplicity="1" />
+          <End Role="invoice_for_payment" Type="Self.invoice_for_payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guests_currently_living_in_the_hotel">
+              <PropertyRef Name="client_ID" />
+            </Principal>
+            <Dependent Role="invoice_for_payment">
+              <PropertyRef Name="kolichestvo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov">
+          <End Role="grafik_yborki_nomerov" Type="Self.grafik_yborki_nomerov" Multiplicity="1" />
+          <End Role="report_on_the_state_of_the_room_stock_as_of_date" Type="Self.report_on_the_state_of_the_room_stock_as_of_date" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="grafik_yborki_nomerov">
+              <PropertyRef Name="housemaid_ID" />
+            </Principal>
+            <Dependent Role="report_on_the_state_of_the_room_stock_as_of_date">
+              <PropertyRef Name="floor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище name_database2ModelContainer">
+          <EntitySet Name="grafik_yborki_nomerov" EntityType="Self.grafik_yborki_nomerov" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="guests_currently_living_in_the_hotel" EntityType="Self.guests_currently_living_in_the_hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoice_for_payment" EntityType="Self.invoice_for_payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nomernoi_fond" EntityType="Self.Nomernoi_fond" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="otchet_po_oplate" EntityType="Self.otchet_po_oplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="report_on_the_state_of_the_room_stock_as_of_date" EntityType="Self.report_on_the_state_of_the_room_stock_as_of_date" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel" Association="Self.FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel">
+            <End Role="guests_currently_living_in_the_hotel" EntitySet="guests_currently_living_in_the_hotel" />
+            <End Role="grafik_yborki_nomerov" EntitySet="grafik_yborki_nomerov" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guests_currently_living_in_the_hotel_otchet_po_oplate" Association="Self.FK_guests_currently_living_in_the_hotel_otchet_po_oplate">
+            <End Role="otchet_po_oplate" EntitySet="otchet_po_oplate" />
+            <End Role="guests_currently_living_in_the_hotel" EntitySet="guests_currently_living_in_the_hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_for_payment_guests_currently_living_in_the_hotel" Association="Self.FK_invoice_for_payment_guests_currently_living_in_the_hotel">
+            <End Role="guests_currently_living_in_the_hotel" EntitySet="guests_currently_living_in_the_hotel" />
+            <End Role="invoice_for_payment" EntitySet="invoice_for_payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov" Association="Self.FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov">
+            <End Role="grafik_yborki_nomerov" EntitySet="grafik_yborki_nomerov" />
+            <End Role="report_on_the_state_of_the_room_stock_as_of_date" EntitySet="report_on_the_state_of_the_room_stock_as_of_date" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="name_database2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="grafik_yborki_nomerov">
+          <Key>
+            <PropertyRef Name="housemaid_ID" />
+          </Key>
+          <Property Name="housemaid_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="floor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="guests_currently_living_in_the_hotel" Relationship="Self.FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel" FromRole="grafik_yborki_nomerov" ToRole="guests_currently_living_in_the_hotel" />
+          <NavigationProperty Name="report_on_the_state_of_the_room_stock_as_of_date" Relationship="Self.FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov" FromRole="grafik_yborki_nomerov" ToRole="report_on_the_state_of_the_room_stock_as_of_date" />
+        </EntityType>
+        <EntityType Name="guests_currently_living_in_the_hotel">
+          <Key>
+            <PropertyRef Name="client_ID" />
+          </Key>
+          <Property Name="floor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nomer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="client_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="grafik_yborki_nomerov" Relationship="Self.FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel" FromRole="guests_currently_living_in_the_hotel" ToRole="grafik_yborki_nomerov" />
+          <NavigationProperty Name="otchet_po_oplate" Relationship="Self.FK_guests_currently_living_in_the_hotel_otchet_po_oplate" FromRole="guests_currently_living_in_the_hotel" ToRole="otchet_po_oplate" />
+          <NavigationProperty Name="invoice_for_payment" Relationship="Self.FK_invoice_for_payment_guests_currently_living_in_the_hotel" FromRole="guests_currently_living_in_the_hotel" ToRole="invoice_for_payment" />
+        </EntityType>
+        <EntityType Name="invoice_for_payment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="artikul" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tovar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kolichestvo" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cena" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="stavkaNDS" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="summaNDS" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="summa" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="guests_currently_living_in_the_hotel" Relationship="Self.FK_invoice_for_payment_guests_currently_living_in_the_hotel" FromRole="invoice_for_payment" ToRole="guests_currently_living_in_the_hotel" />
+        </EntityType>
+        <EntityType Name="Nomernoi_fond">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="floor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nomer" Type="Int32" Nullable="false" />
+          <Property Name="kategoria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="otchet_po_oplate">
+          <Key>
+            <PropertyRef Name="client_ID" />
+          </Key>
+          <Property Name="client_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kategoria_nomera" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="data_vezda" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="data_viezda" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="summa" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="oplacheno" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="guests_currently_living_in_the_hotel" Relationship="Self.FK_guests_currently_living_in_the_hotel_otchet_po_oplate" FromRole="otchet_po_oplate" ToRole="guests_currently_living_in_the_hotel" />
+        </EntityType>
+        <EntityType Name="report_on_the_state_of_the_room_stock_as_of_date">
+          <Key>
+            <PropertyRef Name="floor_ID" />
+          </Key>
+          <Property Name="floor_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nomer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="kategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="data_viezda" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="grafik_yborki_nomerov" Relationship="Self.FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov" FromRole="report_on_the_state_of_the_room_stock_as_of_date" ToRole="grafik_yborki_nomerov" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel">
+          <End Role="guests_currently_living_in_the_hotel" Type="Self.guests_currently_living_in_the_hotel" Multiplicity="1" />
+          <End Role="grafik_yborki_nomerov" Type="Self.grafik_yborki_nomerov" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="guests_currently_living_in_the_hotel">
+              <PropertyRef Name="client_ID" />
+            </Principal>
+            <Dependent Role="grafik_yborki_nomerov">
+              <PropertyRef Name="housemaid_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov">
+          <End Role="grafik_yborki_nomerov" Type="Self.grafik_yborki_nomerov" Multiplicity="1" />
+          <End Role="report_on_the_state_of_the_room_stock_as_of_date" Type="Self.report_on_the_state_of_the_room_stock_as_of_date" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="grafik_yborki_nomerov">
+              <PropertyRef Name="housemaid_ID" />
+            </Principal>
+            <Dependent Role="report_on_the_state_of_the_room_stock_as_of_date">
+              <PropertyRef Name="floor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guests_currently_living_in_the_hotel_otchet_po_oplate">
+          <End Role="otchet_po_oplate" Type="Self.otchet_po_oplate" Multiplicity="1" />
+          <End Role="guests_currently_living_in_the_hotel" Type="Self.guests_currently_living_in_the_hotel" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="otchet_po_oplate">
+              <PropertyRef Name="client_ID" />
+            </Principal>
+            <Dependent Role="guests_currently_living_in_the_hotel">
+              <PropertyRef Name="client_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_for_payment_guests_currently_living_in_the_hotel">
+          <End Role="guests_currently_living_in_the_hotel" Type="Self.guests_currently_living_in_the_hotel" Multiplicity="1" />
+          <End Role="invoice_for_payment" Type="Self.invoice_for_payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guests_currently_living_in_the_hotel">
+              <PropertyRef Name="client_ID" />
+            </Principal>
+            <Dependent Role="invoice_for_payment">
+              <PropertyRef Name="kolichestvo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="name_database2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="grafik_yborki_nomerov" EntityType="Self.grafik_yborki_nomerov" />
+          <EntitySet Name="guests_currently_living_in_the_hotel" EntityType="Self.guests_currently_living_in_the_hotel" />
+          <EntitySet Name="invoice_for_payment" EntityType="Self.invoice_for_payment" />
+          <EntitySet Name="Nomernoi_fond" EntityType="Self.Nomernoi_fond" />
+          <EntitySet Name="otchet_po_oplate" EntityType="Self.otchet_po_oplate" />
+          <EntitySet Name="report_on_the_state_of_the_room_stock_as_of_date" EntityType="Self.report_on_the_state_of_the_room_stock_as_of_date" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel" Association="Self.FK_grafik_yborki_nomerov_guests_currently_living_in_the_hotel">
+            <End Role="guests_currently_living_in_the_hotel" EntitySet="guests_currently_living_in_the_hotel" />
+            <End Role="grafik_yborki_nomerov" EntitySet="grafik_yborki_nomerov" />
+          </AssociationSet>
+          <AssociationSet Name="FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov" Association="Self.FK_report_on_the_state_of_the_room_stock_as_of_date_grafik_yborki_nomerov">
+            <End Role="grafik_yborki_nomerov" EntitySet="grafik_yborki_nomerov" />
+            <End Role="report_on_the_state_of_the_room_stock_as_of_date" EntitySet="report_on_the_state_of_the_room_stock_as_of_date" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guests_currently_living_in_the_hotel_otchet_po_oplate" Association="Self.FK_guests_currently_living_in_the_hotel_otchet_po_oplate">
+            <End Role="otchet_po_oplate" EntitySet="otchet_po_oplate" />
+            <End Role="guests_currently_living_in_the_hotel" EntitySet="guests_currently_living_in_the_hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_for_payment_guests_currently_living_in_the_hotel" Association="Self.FK_invoice_for_payment_guests_currently_living_in_the_hotel">
+            <End Role="guests_currently_living_in_the_hotel" EntitySet="guests_currently_living_in_the_hotel" />
+            <End Role="invoice_for_payment" EntitySet="invoice_for_payment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище name_database2ModelContainer" CdmEntityContainer="name_database2Entities">
+          <EntitySetMapping Name="grafik_yborki_nomerov">
+            <EntityTypeMapping TypeName="name_database2Model.grafik_yborki_nomerov">
+              <MappingFragment StoreEntitySet="grafik_yborki_nomerov">
+                <ScalarProperty Name="housemaid_ID" ColumnName="housemaid_ID" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="otchestvo" ColumnName="otchestvo" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="data" ColumnName="data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guests_currently_living_in_the_hotel">
+            <EntityTypeMapping TypeName="name_database2Model.guests_currently_living_in_the_hotel">
+              <MappingFragment StoreEntitySet="guests_currently_living_in_the_hotel">
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
+                <ScalarProperty Name="kategoria" ColumnName="kategoria" />
+                <ScalarProperty Name="client_ID" ColumnName="client_ID" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="otchestvo" ColumnName="otchestvo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoice_for_payment">
+            <EntityTypeMapping TypeName="name_database2Model.invoice_for_payment">
+              <MappingFragment StoreEntitySet="invoice_for_payment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="artikul" ColumnName="artikul" />
+                <ScalarProperty Name="tovar" ColumnName="tovar" />
+                <ScalarProperty Name="kolichestvo" ColumnName="kolichestvo" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+                <ScalarProperty Name="stavkaNDS" ColumnName="stavkaNDS" />
+                <ScalarProperty Name="summaNDS" ColumnName="summaNDS" />
+                <ScalarProperty Name="summa" ColumnName="summa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nomernoi_fond">
+            <EntityTypeMapping TypeName="name_database2Model.Nomernoi_fond">
+              <MappingFragment StoreEntitySet="Nomernoi_fond">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
+                <ScalarProperty Name="kategoria" ColumnName="kategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="otchet_po_oplate">
+            <EntityTypeMapping TypeName="name_database2Model.otchet_po_oplate">
+              <MappingFragment StoreEntitySet="otchet_po_oplate">
+                <ScalarProperty Name="client_ID" ColumnName="client_ID" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="otchestvo" ColumnName="otchestvo" />
+                <ScalarProperty Name="kategoria_nomera" ColumnName="kategoria_nomera" />
+                <ScalarProperty Name="data_vezda" ColumnName="data_vezda" />
+                <ScalarProperty Name="data_viezda" ColumnName="data_viezda" />
+                <ScalarProperty Name="summa" ColumnName="summa" />
+                <ScalarProperty Name="oplacheno" ColumnName="oplacheno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="report_on_the_state_of_the_room_stock_as_of_date">
+            <EntityTypeMapping TypeName="name_database2Model.report_on_the_state_of_the_room_stock_as_of_date">
+              <MappingFragment StoreEntitySet="report_on_the_state_of_the_room_stock_as_of_date">
+                <ScalarProperty Name="floor_ID" ColumnName="floor_ID" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
+                <ScalarProperty Name="kategoria" ColumnName="kategoria" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="data_viezda" ColumnName="data_viezda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="name_database2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
